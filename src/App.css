@@ -1,6 +1,13 @@
 .App {
   text-align: center;
 }
+.Main {
+	border: 4px solid #7d9fc2;
+	border-bottom-right-radius: 12;
+	border-bottom-left-radius: 12;
+	padding: 2em;
+	background-color: #95B7D9;
+}
 
 .App-logo {
   height: 40vmin;
