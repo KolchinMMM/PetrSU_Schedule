@@ -20,13 +20,13 @@ function App() {
   );
 }
 
-function Nakakal() {
+function Main() {
   return (
-    <div>
-      Naval govna
+    <div className="Main">
+      Навал говна
     </div>
 
   );
 }
 
-export default Nakakal;
+export default Main;
