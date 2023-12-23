@@ -1,0 +1,27 @@
+.Header{
+    background-color: #809edd;
+    display:flex;
+    align-items: center;
+    border-color: grey;
+	border-style: solid;
+	border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+	border-width: 1px;
+	padding: 5px;
+    font-weight:bold;
+    font-size:20px;
+}
+
+.SandwichMenu {
+	border: 1px solid black;
+	flex-direction: column;
+	margin-left: auto;
+}
+
+.SandwichMenu > div {
+	width: 35px;
+	height: 5px;
+	background-color: black;
+	margin: 4px 0;
+	
+}

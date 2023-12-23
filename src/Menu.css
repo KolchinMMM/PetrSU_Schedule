@@ -1,0 +1,71 @@
+.menu {
+	position: fixed;
+	display:flex;
+	align-items: center;
+	flex-direction: column;
+	top: 0;
+	right: -100%;
+	width: 50%;
+	height: 100%;
+	background: #fff;
+	transition: right 0.3s ease;
+	border-color: black;
+	border-style: solid;
+	border-top-left-radius: 12px;
+	border-bottom-left-radius: 12px;
+	border-width: 1px;
+}
+
+.dropdown{
+  display:flex;
+  flex-direction: row;
+  padding:10px;
+}
+
+.dropdown > div{
+  width:100%;
+}
+.menu.open {
+  right: 0;
+}
+
+.menu button {
+  top: 10px;
+  right: 10px;
+}
+
+.lesson{
+	width:300px;
+    display:flex;
+	border-color: black;
+	border-style: solid;
+	border-radius: 12px;
+	border-width: 1px;
+	padding: 5px;
+	margin-bottom: 10px;
+	margin-left:10px;
+	flex-direction: column;
+}
+
+.one-row{
+	display:flex;
+	flex-direction: row;
+	align-items: flex-end;
+}
+
+.toright{
+	margin-left: auto;
+
+}
+
+.MBody{
+	padding:10px;
+	width:100%;
+}
+
+.weekday{
+	font-weight:bold;
+	margin: 10px;
+	margin-left:28px;
+	width:100%;
+}
