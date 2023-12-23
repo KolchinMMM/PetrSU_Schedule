@@ -103,6 +103,14 @@ const Menu = ({ isOpen, toggleMenu }) => {
 		  ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'][dayOfWeek];
 	  }
 
+	  const groupBy = prop => data => {
+		return data.reduce((dict, item) => {
+		  const { [prop]: _, ...rest } = item;
+		  dict[item[prop]] = [...(dict[item[prop]] || []), rest];
+		  return dict;
+		}, {});
+	  };
+
 	async function Do(group, teacher, cab){
 		setTimetable(["Идет поиск..."])
 		let answer = []
@@ -125,29 +133,50 @@ const Menu = ({ isOpen, toggleMenu }) => {
 		}
 		let jsx = []
 		let previousDate = ""
-		for(let i = 0; i < answer.length; i++){
-			const l = answer[i]
-			const weekday = getDayOfWeek(l["date"])
-			let item = 
-			<>
-				{weekday != previousDate? <div className="weekday">{weekday}</div> : ""}
-				<div style={{background: colour}} className="lesson" key={i}>
-					<div className="lessonName" style={{marginBottom: 4}}>{l["number"]}. {l["title"]}</div>
-					<div className="lessonLecturer" style={{marginBottom: 4}}>{l["lecturer"]}</div>
-					<div className="one-row">
-						<div className="times">
-							<div className="time">{l["start_time"]}</div>
-							<div className="time">{l["end_time"]}</div>
-						</div>
-						<div className="toright">
-							<div className="group">{"Группа " + l["group"]}</div>
-							<div className="classroom">{l["classroom"]}</div>
+		let arr = Object.values(answer)
+		arr.sort(function(a, b) {
+			return a["date"].localeCompare(b["date"]);
+		});
+
+		// const result = Object.entries(arr.reduce((acc, { date, number, end_time, group, classroom, lecturer, number, start_time, title, type }) => {
+		// 	acc[date] = [...(acc[date] || []), { date, number, end_time, group, classroom, lecturer, number, start_time, title, type }];
+		// 	return acc;
+		//   }, {})).map(([key, value]) => ({ name: key, children: value }));
+
+		const result = Object.entries(groupBy('date')(arr))
+		.map(([key, value]) => ({ name: key, children: value }));
+
+
+		let count = 0
+		for (const day of result){
+			let aaa = day["children"]
+			aaa.sort(function(a, b) {
+				return a["number"].localeCompare(b["number"]);
+			});
+			console.log(day)
+			const weekday = getDayOfWeek(day["name"])
+			
+			jsx.push(<div className="weekday">{weekday}</div>)
+			for (const l of aaa){
+				let item = 
+				<>
+					<div style={{background: colour}} className="lesson" key={count}>
+						<div className="lessonName" style={{marginBottom: 4}}>{l["number"]}. {l["title"]}</div>
+						<div className="lessonLecturer" style={{marginBottom: 4}}>{l["lecturer"]}</div>
+						<div className="one-row">
+							<div className="times">
+								<div className="time">{l["start_time"]}</div>
+								<div className="time">{l["end_time"]}</div>
+							</div>
+							<div className="toright">
+								<div className="group">{"Группа " + l["group"]}</div>
+								<div className="classroom">{l["classroom"]}</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</>
-			previousDate = weekday
-			jsx.push(item)
+				</>
+				jsx.push(item)
+			}
 		}
 		setTimetable(jsx)
 	}
