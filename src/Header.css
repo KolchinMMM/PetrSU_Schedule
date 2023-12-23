@@ -13,7 +13,6 @@
 }
 
 .SandwichMenu {
-	border: 1px solid black;
 	flex-direction: column;
 	margin-left: auto;
 }

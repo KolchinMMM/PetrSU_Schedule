@@ -55,8 +55,8 @@ const Menu = ({ isOpen, toggleMenu }) => {
 				className="w-full md:w-14rem" />
 			</div>
 			<div className="dropdown">
-				<label>Группа: </label>
-				<input value={selectedGroup} onChange={(event) => setSelectedGroup(event.target.value)} className="form-control" id="inputPassword" aria-describedby="errorPassword" />             
+				<label>Группа:</label>
+				<input style={{flex:1}} value={selectedGroup} onChange={(event) => setSelectedGroup(event.target.value)} className="form-control" id="inputPassword" aria-describedby="errorPassword" />             
 			</div>
 			<div className="dropdown">
 				<label>Преподаватель: </label>
@@ -70,11 +70,11 @@ const Menu = ({ isOpen, toggleMenu }) => {
 
 			<div className="dropdown">
 				<label>Аудитория: </label>
-				<input value={cabinet} onChange={(event) => setCabinet(event.target.value)} className="form-control" id="inputPassword" aria-describedby="errorPassword" />             
+				<input style={{flex:1}} value={cabinet} onChange={(event) => setCabinet(event.target.value)} className="form-control" id="inputPassword" aria-describedby="errorPassword" />             
 			</div>
 			<div className="dropdown">
 				<label>Цвет: </label>
-				<input type="color" onChange={(event) => setColour(event.target.value)} className="form-control" id="inputColor"/>             
+				<input type="color" value = {"#809edd"} onChange={(event) => setColour(event.target.value)} className="form-control" id="inputColor"/>             
 			</div>
 
 		</div>
@@ -86,7 +86,9 @@ const Menu = ({ isOpen, toggleMenu }) => {
 		setError("")
 		if (selectedGroup === "" && selectedTeacher === "" && cabinet === ""){
 			setError("Выберите хоть что-то!")
-			
+		}
+		else if (!groups.includes(selectedGroup)){
+			setError("Данной группы не существует!")
 		}
 		else{
 			Do(selectedGroup, selectedTeacher, cabinet)
@@ -162,11 +164,11 @@ const Menu = ({ isOpen, toggleMenu }) => {
 		<>
 		<div className={`menu ${isOpen ? 'open' : ''}`}>
 			
-			<button onClick={toggleMenu}>Закрыть меню</button>
+			<button onClick={toggleMenu} class="btn-close">Закрыть меню</button>
 			
 			{Filters()}
 			{error}
-			<button onClick={() => {Process()}}>Посрать</button>
+			<button onClick={() => {Process()}}>Применить</button>
 			{/* Дополнительное содержимое меню */}
 		</div>
 		<div>{timetable}</div>
