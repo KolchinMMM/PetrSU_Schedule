@@ -51,8 +51,8 @@ const Menu = ({ isOpen, toggleMenu }) => {
 				value={week} 
 				onChange={(e) => setWeek(e.value)} 
 				options={["числитель", "знаменатель"]}
-			
-				className="w-full md:w-14rem" />
+				className="Teachers" />
+
 			</div>
 			<div className="dropdown">
 				<label>Группа:</label>
@@ -87,7 +87,7 @@ const Menu = ({ isOpen, toggleMenu }) => {
 		if (selectedGroup === "" && selectedTeacher === "" && cabinet === ""){
 			setError("Выберите хоть что-то!")
 		}
-		else if (!groups.includes(selectedGroup)){
+		else if (!groups.includes(selectedGroup) && !selectedGroup === ""){
 			setError("Данной группы не существует!")
 		}
 		else{
@@ -115,15 +115,11 @@ const Menu = ({ isOpen, toggleMenu }) => {
 		lessons = Object.values(lessons)
 		for(let i = 0; i<lessons.length; i++){
 			var les = lessons[i]
-			console.log(les)
-			console.log(w)
 			const lesson_week = les[w]
-			console.log(lesson_week)
 			for(const ll of Object.values(lesson_week)){
 				for (const lesson of ll)
 				if ((lesson["lecturer"] === teacher || teacher === "") && (lesson["classroom"].includes(cab) || cab === "") && (lesson["group"] === group || group === "")){
 					answer.push(lesson)
-					console.log(lesson)
 				}
 			}
 		}
@@ -131,8 +127,6 @@ const Menu = ({ isOpen, toggleMenu }) => {
 		let previousDate = ""
 		for(let i = 0; i < answer.length; i++){
 			const l = answer[i]
-
-			console.log(l)
 			const weekday = getDayOfWeek(l["date"])
 			let item = 
 			<>
@@ -146,7 +140,7 @@ const Menu = ({ isOpen, toggleMenu }) => {
 							<div className="time">{l["end_time"]}</div>
 						</div>
 						<div className="toright">
-							<div className="group">{"Группа" + l["group"]}</div>
+							<div className="group">{"Группа " + l["group"]}</div>
 							<div className="classroom">{l["classroom"]}</div>
 						</div>
 					</div>
@@ -156,7 +150,6 @@ const Menu = ({ isOpen, toggleMenu }) => {
 			jsx.push(item)
 		}
 		setTimetable(jsx)
-		console.log(timetable)
 	}
 
 
