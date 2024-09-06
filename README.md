@@ -1,7 +1,4 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+Расписание ПетрГУ с фильтрами. Доступно по https://kappa.cs.petrsu.ru/~kolchin/Schedule/
 ## Available Scripts
 
 In the project directory, you can run:
